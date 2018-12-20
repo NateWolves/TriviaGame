@@ -51,15 +51,24 @@ function choice(){
         $(".answerArea").empty();
         $(".timeDisplay").empty();
         $(".questionArea").text("Incorrect");
-        $(".questionArea").append("<img src='https://gph.is/19lgJRv' alt='eagle reaction'>")
+        // $(".questionArea").append("<img src='https://gph.is/19lgJRv' alt='eagle reaction'>")
         resultTimeout = setTimeout(start, 5000);
     }
 }
+function results(){
+    $(".timeDisplay").empty();
+    $(".questionArea").text("Results");
+    $(".answerArea").text("Your correct guesses: "+ right + "  Incorrect guesses: "+ wrong);
 
+}
 
 
 function start(){
-    clearTimeout(resultTimeout)
+    clearTimeout(resultTimeout);
+    if( round === 9){
+        results();
+        return;
+    }
     var newQuestion = questions.results[round].question;
     var newAnswer = questions.results[round].correct_answer;
     var answerArray = questions.results[round].incorrect_answers;
