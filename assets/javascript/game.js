@@ -21,6 +21,7 @@ function timer(){
 };
 function timesUp(){
     round++;
+    notAnswered++;
     count = 25;
     clearInterval(showQuestion);
     $(".questionArea").empty(); 
@@ -83,6 +84,7 @@ function start(){
     $(".questionArea").empty(); 
     $(".answerArea").empty();
     $(".questionArea").append("<div> Round: " + (round + 1) + "</div>");
+    $(".timeDisplay").html("<div>Time remaining: </div>");
     answerArray.push(newAnswer);
     shuffle(answerArray);
     $('.questionArea').append("<div>"+newQuestion+"</div>");
