@@ -1,4 +1,28 @@
 body{
     background-image: url("../images/palm-leaf.png");
-
+    text-align: center;
 }
+#startHere{
+    background-color: #035f39;
+    color:white;
+}
+.choices {
+    background-color: #035f39;
+    color:white;
+    margin: 10px 0px 0px 0px;
+}
+.answerArea{
+    margin:0 auto;
+}
+.jumbotron {
+    background-color:  #035f39;
+    color: white;
+    
+    /* border-style: dashed;
+    border-color: #035f39;
+    border-width: 4px; */
+}
+/* #grayBox{
+    background-color: #035f39;
+    width: 100%;
+} */

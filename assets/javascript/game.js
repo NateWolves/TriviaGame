@@ -1,4 +1,4 @@
-var count= 0;
+var count= 25;
 var showQuestion;
 var correctAnswer;
 var questions= [];
@@ -13,15 +13,15 @@ function nextQuestion(){
 }
 
 function timer(){
-    count++;
+    count--;
     $(".timeDisplay").html("<div>Time remaining: "+ count +"</div")
-    if (count === 10){
+    if (count === 0){
         timesUp();    
     }
 };
 function timesUp(){
     round++;
-    count = 0;
+    count = 25;
     clearInterval(showQuestion);
     $(".questionArea").empty(); 
     $(".answerArea").empty();
@@ -34,41 +34,48 @@ function choice(){
     if($(this).text() == correctAnswer){
         right++;
         round++;
-        count = 0;
+        count = 25;
         clearInterval(showQuestion);
         $(".questionArea").empty(); 
         $(".answerArea").empty();
         $(".timeDisplay").empty();
         $(".questionArea").text("You are correct");
-        resultTimeout = setTimeout(start, 5000);
+        resultTimeout = setTimeout(start, 1000);
     }
     else{
         wrong++;
         round++;
-        count = 0;
+        count = 25;
         clearInterval(showQuestion);
         $(".questionArea").empty(); 
         $(".answerArea").empty();
         $(".timeDisplay").empty();
         $(".questionArea").text("Incorrect");
         // $(".questionArea").append("<img src='https://gph.is/19lgJRv' alt='eagle reaction'>")
-        resultTimeout = setTimeout(start, 5000);
+        resultTimeout = setTimeout(start, 1000);
     }
 }
 function results(){
+    round = 0;
+    questions = [];
     $(".timeDisplay").empty();
+    $("#startHere").css("display","inline-block");
     $(".questionArea").text("Results");
-    $(".answerArea").text("Your correct guesses: "+ right + "  Incorrect guesses: "+ wrong);
-
+    $(".answerArea").text("Your correct guesses: "+ right + "  Incorrect guesses: "+ wrong +"  Not answered: "+ notAnswered);
+    
+    
 }
 
 
 function start(){
+    
     clearTimeout(resultTimeout);
-    if( round === 9){
+    if( round === 10){
         results();
+        triviaApi();
         return;
     }
+    $("#startHere").css("display","none");
     var newQuestion = questions.results[round].question;
     var newAnswer = questions.results[round].correct_answer;
     var answerArray = questions.results[round].incorrect_answers;
@@ -81,7 +88,7 @@ function start(){
     $('.questionArea').append("<div>"+newQuestion+"</div>");
 
     answerArray.forEach(function(element){
-        $('.answerArea').append("<div class='col-md-4 choices' >"+ element +"</div>")  
+        $('.answerArea').append("<div class='col-md-12 choices rounded'>"+ element +"</div>")  
     });
     nextQuestion();
 };
